@@ -1,0 +1,13 @@
+import { chromium } from "playwright";
+const b = await chromium.launch();
+const p = await b.newContext({ viewport: { width: 1440, height: 900 } }).then(c => c.newPage());
+const failed = [];
+p.on("requestfailed", r => failed.push("FAIL " + r.url()));
+p.on("response", r => { if (r.status() >= 400) failed.push(r.status() + " " + r.url()); });
+await p.goto("http://localhost:3100/", { waitUntil: "networkidle" });
+await p.waitForTimeout(800);
+const fs = await p.evaluate(() => { const h = document.querySelector("h1"); return h ? getComputedStyle(h).fontSize : "no-h1"; });
+await p.screenshot({ path: "scripts/verify-hero.png" });
+await b.close();
+console.log("H1_FONT_SIZE:" + fs);
+console.log("FAILED_4xx_OR_FAILED_REQUESTS:" + JSON.stringify(failed));
