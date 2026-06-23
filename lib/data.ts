@@ -308,15 +308,15 @@ export const BIG_TESTIMONIAL = {
 export const MOVEMENT = [
   {
     title: "By Marketers, For Marketers",
-    body: "Butterfly was built and powered by marketers focused on the traditional issues professionals face day to day.",
+    body: "Axnix was built and powered by marketers focused on the traditional issues marketing professionals face day to day. Once success was found, it was introduced to the market to help marketers face common challenges.",
   },
   {
     title: "Community Driven Development",
-    body: "We've built a community-driven Ideas Board where you can share and vote on ideas to help lead the direction of development.",
+    body: "Axnix is committed to helping the Marketing world. We've built a community-driven Ideas Board where you can share and vote on ideas to help lead the direction of development.",
   },
   {
-    title: "Network With Successful Marketers",
-    body: "Connect with ambitious agency owners, entrepreneurs and marketing professionals scaling successful businesses.",
+    title: "Network With Other Successful Marketers",
+    body: "Connect with other ambitious agency owners, entrepreneurs and marketing professionals who are scaling successful businesses with Axnix.",
   },
 ] as const;
 

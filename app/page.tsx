@@ -4,6 +4,7 @@ import { LogoCloud } from "@/components/sections/LogoCloud";
 import { AxnixSolution } from "@/components/sections/AxnixSolution";
 import { AxnixMission } from "@/components/sections/AxnixMission";
 import { AxnixOnTheGo } from "@/components/sections/AxnixOnTheGo";
+import { AxnixMovement } from "@/components/sections/AxnixMovement";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <AxnixSolution />
         <AxnixMission />
         <AxnixOnTheGo />
+        <AxnixMovement />
       </main>
     </div>
   );
