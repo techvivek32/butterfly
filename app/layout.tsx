@@ -16,26 +16,26 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: "Butterfly — The AI-powered business operating system",
+  title: "Axnix — Automate workflows, boost conversions",
   description:
-    "All the tools you need to capture, nurture and close new leads into bookings, sales, reviews and repeat customers. Powered by AI.",
+    "Axnix makes it simple to run email campaigns, trigger workflows, and optimize conversions — all in one smart platform.",
   keywords: [
-    "AI CRM",
-    "business operating system",
     "marketing automation",
-    "all-in-one platform",
-    "Butterfly",
+    "email campaigns",
+    "multi-channel marketing",
+    "conversion optimization",
+    "Axnix",
   ],
   openGraph: {
-    title: "Butterfly — The AI-powered business operating system",
+    title: "Axnix — Automate workflows, boost conversions",
     description:
-      "Capture, nurture and close new leads into bookings, sales and repeat customers.",
+      "Run email campaigns, trigger workflows, and optimize conversions — all in one smart platform.",
     type: "website",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#10b981",
+  themeColor: "#5bbf3f",
 };
 
 export default function RootLayout({
