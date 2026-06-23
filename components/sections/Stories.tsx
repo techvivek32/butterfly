@@ -3,7 +3,6 @@ import { TESTIMONIALS } from "@/lib/data";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
 import { Avatar } from "@/components/mockups/Frames";
 import { Stars } from "@/components/mockups/Charts";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 
 export function Stories() {
   return (
@@ -28,18 +27,6 @@ export function Stories() {
           <div
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-grid opacity-50"
-          />
-
-          {/* Drifting butterfly accents */}
-          <ButterflyMark
-            idSuffix="stories-fly-1"
-            flutter
-            className="pointer-events-none absolute right-10 top-10 hidden h-10 w-10 opacity-40 sm:block"
-          />
-          <ButterflyMark
-            idSuffix="stories-fly-2"
-            flutter
-            className="pointer-events-none absolute bottom-12 left-8 hidden h-8 w-8 opacity-30 lg:block"
           />
 
           <div className="relative">

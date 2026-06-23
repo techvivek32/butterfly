@@ -4,8 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Play, Sparkles, TrendingUp, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HERO } from "@/lib/data";
-import { GlowOrbs, FloatingButterflies } from "@/components/ui/Decor";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
+import { GlowOrbs } from "@/components/ui/Decor";
 import { BrowserFrame, Avatar } from "@/components/mockups/Frames";
 import { Mockup } from "@/components/mockups/Mockups";
 import { Donut, Stars } from "@/components/mockups/Charts";
@@ -40,7 +39,6 @@ export function Hero() {
     >
       {/* Animated backdrops */}
       <GlowOrbs />
-      <FloatingButterflies />
 
       {/* subtle grid wash, masked at the bottom for depth */}
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid opacity-[0.35] mask-fade-b" />
@@ -285,7 +283,7 @@ export function Hero() {
               <div className="glass-card flex animate-float-slow items-center gap-2 rounded-2xl px-3 py-2 shadow-float [animation-delay:0.3s]">
                 <span className="relative grid h-7 w-7 place-items-center rounded-full bg-wing-violet/10">
                   <span className="absolute inset-0 animate-pulse-ring rounded-full ring-2 ring-wing-violet/40" />
-                  <ButterflyMark className="h-4 w-4" flutter idSuffix="hero-badge" />
+                  <Sparkles className="h-4 w-4 text-wing-violet" />
                 </span>
                 <div className="leading-tight">
                   <div className="text-xs font-bold text-ink">AI replied</div>
@@ -294,20 +292,6 @@ export function Hero() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-
-            {/* ---- Floating standalone butterfly ---- */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.6 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 1.35 }}
-              className="absolute -right-6 -top-6 z-20 hidden lg:block"
-            >
-              <ButterflyMark
-                className="h-12 w-12 animate-float drop-shadow-lg"
-                flutter
-                idSuffix="hero-float"
-              />
             </motion.div>
           </div>
         </motion.div>

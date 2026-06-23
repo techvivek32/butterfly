@@ -1,7 +1,6 @@
 import { ArrowRight, Sparkles, Clock, Target } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { Avatar } from "@/components/mockups/Frames";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 
 /**
  * Big closing CTA band — a bright brand-gradient slab with a left-hand pitch
@@ -23,12 +22,6 @@ export function CtaBand() {
             <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/25 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-28 right-1/4 h-80 w-80 rounded-full bg-wing-violet/30 blur-3xl" />
             <div className="pointer-events-none absolute -right-16 top-1/3 h-56 w-56 rounded-full bg-wing-sky/30 blur-3xl" />
-            {/* faint big butterfly watermark */}
-            <ButterflyMark
-              idSuffix="ctaband-watermark"
-              className="pointer-events-none absolute -bottom-16 -right-10 h-[28rem] w-[28rem] rotate-12 opacity-10"
-            />
-
             {/* ---------- LEFT: pitch ---------- */}
             <div className="relative z-10">
               <span className="mb-6 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-semibold text-white ring-1 ring-inset ring-white/25 backdrop-blur">
@@ -155,13 +148,6 @@ export function CtaBand() {
                     </div>
                   </div>
                 </div>
-
-                {/* decorative floating butterfly */}
-                <ButterflyMark
-                  idSuffix="ctaband-float"
-                  flutter
-                  className="absolute -right-6 -top-8 h-16 w-16 animate-float drop-shadow-lg sm:-right-10"
-                />
               </div>
             </div>
           </div>

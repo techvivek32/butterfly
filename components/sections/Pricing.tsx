@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Sparkles, ArrowRight, Zap, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/ui/Reveal";
 import { GlowOrbs } from "@/components/ui/Decor";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 import { PRICING } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -49,14 +48,7 @@ export function Pricing() {
           <Reveal direction="up" delay={0.05}>
             <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
               See Our{" "}
-              <span className="relative inline-flex items-center gap-2 whitespace-nowrap">
-                <span className="text-gradient">Pricing</span>
-                <ButterflyMark
-                  className="h-8 w-8 sm:h-9 sm:w-9"
-                  flutter
-                  idSuffix="pricing-heading"
-                />
-              </span>
+              <span className="text-gradient">Pricing</span>
             </h2>
           </Reveal>
 

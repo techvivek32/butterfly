@@ -7,11 +7,11 @@ import {
   Calendar,
   FileText,
   TrendingUp,
+  Sparkles,
 } from "lucide-react";
 import { ONTHEGO } from "@/lib/data";
 import { Reveal } from "@/components/ui/Reveal";
 import { PhoneFrame, Avatar } from "@/components/mockups/Frames";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 
 const STAT_CARDS = [
   { label: "Tasks Due", value: "12", tint: "text-wing-violet" },
@@ -87,13 +87,6 @@ export function OnTheGo() {
               {/* blurred brand gradient blob */}
               <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-gradient opacity-25 blur-3xl" />
 
-              {/* floating butterfly accent */}
-              <ButterflyMark
-                idSuffix="onthego-accent"
-                flutter
-                className="absolute -left-2 top-6 h-10 w-10 opacity-90 animate-float-slow sm:-left-4"
-              />
-
               {/* floating badge — new leads */}
               <div className="absolute -left-3 top-1/3 z-20 animate-float sm:-left-8">
                 <div className="glass-card flex items-center gap-2.5 rounded-2xl px-3.5 py-2.5 shadow-float">
@@ -129,10 +122,7 @@ export function OnTheGo() {
                   <div className="rounded-b-none bg-brand-gradient p-4 text-white">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <ButterflyMark
-                          idSuffix="onthego-header"
-                          className="h-5 w-5"
-                        />
+                        <Sparkles className="h-5 w-5" />
                         <span className="font-display text-sm font-extrabold tracking-tight">
                           Butterfly
                         </span>

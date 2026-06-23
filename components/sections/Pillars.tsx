@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Layers, Sparkles, Users, Quote, type LucideIcon } from "lucide-react";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 import { Avatar } from "@/components/mockups/Frames";
 import { PILLARS, BIG_TESTIMONIAL } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -26,21 +25,6 @@ function RobotMascot() {
       />
       {/* Soft glow behind the bot */}
       <span className="pointer-events-none absolute h-36 w-36 rounded-full bg-brand-gradient opacity-30 blur-2xl" />
-
-      {/* Orbiting butterfly */}
-      <motion.div
-        className="pointer-events-none absolute h-48 w-48 sm:h-56 sm:w-56"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-      >
-        <div className="absolute left-1/2 top-0 -translate-x-1/2">
-          <ButterflyMark
-            className="h-8 w-8 drop-shadow-[0_0_10px_rgba(20,184,166,0.55)]"
-            flutter
-            idSuffix="pillars-orbit"
-          />
-        </div>
-      </motion.div>
 
       {/* The robot itself, gently floating */}
       <motion.div

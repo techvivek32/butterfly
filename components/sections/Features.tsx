@@ -5,7 +5,6 @@ import { CheckCircle2, Sparkles, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WHY_STATS, FEATURE_GRID } from "@/lib/data";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 import { BrowserFrame } from "@/components/mockups/Frames";
 import { Mockup } from "@/components/mockups/Mockups";
 
@@ -75,7 +74,7 @@ export function Features() {
         {/* ============================================================= */}
         <Reveal direction="up" className="mx-auto max-w-2xl text-center">
           <span className="chip mx-auto">
-            <ButterflyMark className="h-3.5 w-3.5" flutter idSuffix="features-why" />
+            <Sparkles className="h-3.5 w-3.5 text-wing-violet" />
             <span className="font-semibold text-ink-soft">Built to convert</span>
           </span>
           <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">

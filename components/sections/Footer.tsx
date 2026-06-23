@@ -14,7 +14,6 @@ import { cn } from "@/lib/utils";
 import { BRAND, FOOTER } from "@/lib/data";
 import { Reveal } from "@/components/ui/Reveal";
 import { Logo } from "@/components/brand/Logo";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 
 const SOCIALS = [
   { icon: Instagram, label: "Instagram", href: "#" },
@@ -68,12 +67,6 @@ export function Footer() {
       <div
         className="pointer-events-none absolute -top-24 right-10 h-72 w-72 rounded-full bg-brand-200/30 blur-3xl"
         aria-hidden
-      />
-
-      {/* Oversized watermark butterfly */}
-      <ButterflyMark
-        className="pointer-events-none absolute -right-16 bottom-0 h-72 w-72 opacity-[0.05]"
-        idSuffix="footer-watermark"
       />
 
       <div className="section relative py-16">
@@ -183,7 +176,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-black/5 pt-6 sm:flex-row">
           <p className="text-xs text-ink-muted">
-            © 2026 Butterfly, Inc. All Rights Reserved · Made with 🦋 for operators
+            © 2026 Butterfly, Inc. All Rights Reserved · Made with 💚 for operators
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {LEGAL.map((item) => (

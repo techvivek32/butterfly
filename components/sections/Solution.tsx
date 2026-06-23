@@ -6,7 +6,6 @@ import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SOLUTION_TABS } from "@/lib/data";
 import { Reveal } from "@/components/ui/Reveal";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 import { BrowserFrame } from "@/components/mockups/Frames";
 import { Mockup } from "@/components/mockups/Mockups";
 
@@ -190,7 +189,7 @@ export function Solution() {
                     <div className="glass-card flex animate-float items-center gap-2 rounded-2xl px-3 py-2 shadow-float">
                       <span className="relative grid h-7 w-7 place-items-center rounded-full bg-wing-violet/10">
                         <span className="absolute inset-0 animate-pulse-ring rounded-full ring-2 ring-brand-400/40" />
-                        <ButterflyMark className="h-4 w-4" flutter idSuffix={`solution-${tab.key}`} />
+                        <Sparkles className="h-4 w-4 text-wing-violet" />
                       </span>
                       <div className="leading-tight">
                         <div className="text-xs font-bold text-ink">{tab.label}</div>

@@ -1,6 +1,5 @@
 import { CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
 import { Reveal, RevealStagger, RevealItem } from "@/components/ui/Reveal";
-import { ButterflyMark } from "@/components/brand/ButterflyMark";
 import { INCLUDED, INCLUDED_TOTAL, INCLUDED_PRICE } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -98,14 +97,7 @@ export function Included() {
               </span>
               <h2 className="mt-5 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
                 What&apos;s included with{" "}
-                <span className="relative inline-flex items-center gap-2">
-                  <span className="text-gradient">Butterfly</span>
-                  <ButterflyMark
-                    className="h-7 w-7 sm:h-8 sm:w-8"
-                    flutter
-                    idSuffix="included-heading"
-                  />
-                </span>
+                <span className="text-gradient">Butterfly</span>
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted sm:text-base">
                 Replace a stack of pricey point-tools with a single, AI-native
@@ -155,7 +147,7 @@ export function Included() {
                         <span className="text-xs text-ink-muted/70">/mo</span>
                       </div>
 
-                      {/* butterfly check */}
+                      {/* included check */}
                       <div className="justify-self-end">
                         <span className="inline-grid place-items-center rounded-full bg-brand-gradient p-1 text-white shadow-glow transition-transform duration-300 group-hover:scale-110">
                           <CheckCircle2 className="h-4 w-4" strokeWidth={2.4} />
