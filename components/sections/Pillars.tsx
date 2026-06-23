@@ -134,19 +134,19 @@ function RobotMascot() {
 export function Pillars() {
   return (
     <section className="px-5 py-12 sm:px-8 sm:py-16">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-[#06231a] via-[#072a3a] to-[#0a1410] p-8 shadow-float sm:p-14">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-black/5 bg-gradient-to-br from-brand-50 via-white to-brand-50/40 p-8 shadow-[0_24px_70px_-40px_rgba(10,20,16,0.22)] sm:p-14">
         {/* Backdrop layers */}
-        <div className="pointer-events-none absolute inset-0 bg-grid opacity-[0.15]" />
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-50" />
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="absolute -left-24 -top-20 h-80 w-80 rounded-full bg-brand-500/25 blur-3xl" />
-          <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-wing-violet/20 blur-3xl" />
-          <div className="absolute left-1/2 top-1/3 h-64 w-64 -translate-x-1/2 rounded-full bg-wing-sky/15 blur-3xl" />
+          <div className="absolute -left-24 -top-20 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl" />
+          <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-brand-200/40 blur-3xl" />
+          <div className="absolute left-1/2 top-1/3 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-100/50 blur-3xl" />
         </div>
 
         <div className="relative">
           {/* Heading */}
           <Reveal direction="up">
-            <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <h2 className="mx-auto max-w-3xl text-center font-display text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
               We exist to remove friction from growth and give business owners the
               systems they need to{" "}
               <span className="text-gradient">operate, scale and win</span>
@@ -167,15 +167,15 @@ export function Pillars() {
                   <motion.div
                     whileHover={{ y: -6 }}
                     transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                    className="group h-full rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-colors hover:border-white/20 hover:bg-white/[0.08]"
+                    className="group h-full rounded-2xl border border-black/5 bg-white p-5 shadow-card transition-all hover:border-brand-200 hover:shadow-soft"
                   >
                     <div className="w-fit rounded-xl bg-brand-gradient p-2 text-white shadow-glow">
                       <Icon className="h-5 w-5" strokeWidth={2.2} />
                     </div>
-                    <h3 className="mt-4 font-display text-lg font-bold text-white">
+                    <h3 className="mt-4 font-display text-lg font-bold text-ink">
                       {p.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/65">
+                    <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                       {p.body}
                     </p>
                     {/* Accent underline that grows on hover */}

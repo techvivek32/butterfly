@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --bg: #f7fbf9;
+  --bg: #ffffff;
   --ink: #0a1410;
 }
 
@@ -25,8 +25,8 @@ body {
 
 /* Selection */
 ::selection {
-  background: rgba(16, 185, 129, 0.22);
-  color: #064e3b;
+  background: rgba(22, 189, 94, 0.2);
+  color: #107e3f;
 }
 
 /* Custom scrollbar */
@@ -38,7 +38,7 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#34d399, #14b8a6);
+  background: linear-gradient(#3dd47e, #0fa04d);
   border-radius: 99px;
   border: 3px solid var(--bg);
 }
@@ -46,10 +46,10 @@ body {
 @layer components {
   /* Glassmorphism */
   .glass {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(18px) saturate(160%);
-    -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgba(16, 40, 28, 0.06);
   }
   .glass-dark {
     background: rgba(8, 20, 15, 0.55);
@@ -58,22 +58,20 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
   .glass-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(14px) saturate(150%);
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow: 0 10px 40px -16px rgba(10, 20, 16, 0.22);
+    background: #ffffff;
+    border: 1px solid rgba(16, 40, 28, 0.07);
+    box-shadow: 0 12px 36px -18px rgba(10, 20, 16, 0.16);
   }
 
   .text-gradient {
-    background: linear-gradient(120deg, #059669 0%, #14b8a6 40%, #7c3aed 100%);
+    background: linear-gradient(120deg, #0fa04d 0%, #16bd5e 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-brand {
-    background: linear-gradient(120deg, #059669 0%, #10b981 50%, #14b8a6 100%);
+    background: linear-gradient(120deg, #0fa04d 0%, #22c55e 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

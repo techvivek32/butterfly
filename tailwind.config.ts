@@ -8,19 +8,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Butterfly brand palette — emerald primary (AiSensy-like) + butterfly accents
+        // Butterfly brand palette — clean AiSensy-style grass green
         brand: {
-          50: "#ecfdf5",
-          100: "#d1fae5",
-          200: "#a7f3d0",
-          300: "#6ee7b7",
-          400: "#34d399",
-          500: "#10b981",
-          600: "#059669",
-          700: "#047857",
-          800: "#065f46",
-          900: "#064e3b",
-          950: "#022c22",
+          50: "#eefdf3",
+          100: "#d6fbe3",
+          200: "#aff4c9",
+          300: "#79e9a6",
+          400: "#3dd47e",
+          500: "#16bd5e",
+          600: "#0fa04d",
+          700: "#107e3f",
+          800: "#126435",
+          900: "#10522e",
+          950: "#022c17",
         },
         // Butterfly "wing" accents
         wing: {
@@ -48,11 +48,11 @@ const config: Config = {
       },
       backgroundImage: {
         "brand-gradient":
-          "linear-gradient(135deg,#10b981 0%,#14b8a6 45%,#0ea5e9 100%)",
+          "linear-gradient(135deg,#3dd47e 0%,#16bd5e 52%,#0fa04d 100%)",
         "wing-gradient":
-          "linear-gradient(135deg,#7c3aed 0%,#d946ef 50%,#10b981 100%)",
+          "linear-gradient(135deg,#16bd5e 0%,#14b8a6 50%,#0fa04d 100%)",
         "mesh-light":
-          "radial-gradient(60% 60% at 15% 10%, rgba(16,185,129,0.16) 0%, transparent 60%), radial-gradient(50% 50% at 95% 5%, rgba(124,58,237,0.14) 0%, transparent 55%), radial-gradient(55% 55% at 80% 95%, rgba(14,165,233,0.12) 0%, transparent 60%)",
+          "radial-gradient(60% 60% at 12% 8%, rgba(22,189,94,0.13) 0%, transparent 60%), radial-gradient(45% 45% at 92% 6%, rgba(22,189,94,0.08) 0%, transparent 55%), radial-gradient(55% 55% at 82% 96%, rgba(16,160,77,0.07) 0%, transparent 60%)",
       },
       keyframes: {
         float: {
