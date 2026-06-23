@@ -5,6 +5,8 @@ import { AxnixSolution } from "@/components/sections/AxnixSolution";
 import { AxnixMission } from "@/components/sections/AxnixMission";
 import { AxnixOnTheGo } from "@/components/sections/AxnixOnTheGo";
 import { AxnixMovement } from "@/components/sections/AxnixMovement";
+import { AxnixStats } from "@/components/sections/AxnixStats";
+import { AxnixIncluded } from "@/components/sections/AxnixIncluded";
 
 export default function Home() {
   return (
@@ -17,6 +19,8 @@ export default function Home() {
         <AxnixMission />
         <AxnixOnTheGo />
         <AxnixMovement />
+        <AxnixIncluded />
+        <AxnixStats />
       </main>
     </div>
   );
