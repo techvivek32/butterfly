@@ -302,7 +302,7 @@ export const BIG_TESTIMONIAL = {
   role: "Compass Marketing Creative",
   color: "#10b981",
   quote:
-    "I felt completely supported as soon as I joined the platform. These guys care about my business and have taken it to the next level. The technology keeps shifting and improving while getting better and better — they're always providing new services and things I love.",
+    "I felt completely supported as soon as I join the platform...These guys care about my business and have taken my business to the next level. The technology is continuing to shift and change while getting better and better. They are providing new services and things that I love.",
 } as const;
 
 export const MOVEMENT = [
