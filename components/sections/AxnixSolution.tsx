@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Filter,
@@ -39,129 +39,210 @@ const SPLITS: Record<string, number> = {
   reactivate: 6,
 };
 
-/** Accent colour. `dark` = use white text/icon on the solid colour.
- *  Unified to the Axnix brand green across every phase. */
-type Accent = { solid: string; glow: string; dark: boolean };
-const BRAND_GREEN: Accent = { solid: "#16bd5e", glow: "rgba(22,189,94,0.5)", dark: true };
-const ACCENTS: Record<string, Accent> = {
-  capture: BRAND_GREEN,
-  nurture: BRAND_GREEN,
-  close: BRAND_GREEN,
-  evangelize: BRAND_GREEN,
-  reactivate: BRAND_GREEN,
-};
-
 export function AxnixSolution() {
+  const tabs = SOLUTION_TABS;
   const [active, setActive] = useState(0);
-  const tab = SOLUTION_TABS[active];
+  const [progress, setProgress] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const tab = tabs[active];
   const Icon = ICONS[tab.key] ?? Filter;
-  const accent = ACCENTS[tab.key] ?? ACCENTS.capture;
   const splitAt = SPLITS[tab.key] ?? Math.ceil(tab.features.length / 2);
   const leftFeatures = tab.features.slice(0, splitAt);
   const rightFeatures = tab.features.slice(splitAt);
 
-  return (
-    <section id="features" className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
-      {/* Heading */}
-      <h2 className="mx-auto max-w-3xl text-center font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-neutral-900 sm:text-5xl">
-        Your all-in-one solution for business growth
-      </h2>
-      <p className="mt-4 text-center text-lg text-neutral-500">
-        All the tools you need in one AI-powered platform
-      </p>
+  const num = String(active + 1).padStart(2, "0");
+  const total = String(tabs.length).padStart(2, "0");
 
-      {/* Tabs */}
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-        {SOLUTION_TABS.map((t, i) => {
-          const isActive = i === active;
-          const a = ACCENTS[t.key] ?? ACCENTS.capture;
-          return (
-            <button
-              key={t.key}
-              type="button"
-              onClick={() => setActive(i)}
-              style={
-                isActive ? { boxShadow: `0 12px 34px -8px ${a.glow}` } : undefined
-              }
-              className={
-                isActive
-                  ? "rounded-xl bg-brand-gradient px-6 py-2.5 text-[15px] font-bold text-white transition"
-                  : "rounded-xl border border-neutral-200 bg-white px-6 py-2.5 text-[15px] font-medium text-neutral-700 transition hover:border-neutral-300 hover:bg-neutral-50"
-              }
-            >
-              {t.label}
-            </button>
-          );
-        })}
+  // Auto-advance through the journey; pauses while the user hovers the section.
+  const DURATION = 6500;
+  useEffect(() => {
+    if (paused) return;
+    setProgress(0);
+    const start = performance.now();
+    const id = setInterval(() => {
+      const p = Math.min((performance.now() - start) / DURATION, 1);
+      setProgress(p);
+      if (p >= 1) {
+        clearInterval(id);
+        setActive((a) => (a + 1) % tabs.length);
+      }
+    }, 60);
+    return () => clearInterval(id);
+  }, [active, paused, tabs.length]);
+
+  const select = (i: number) => {
+    setActive(i);
+    setProgress(0);
+  };
+
+  // 0–80%: line spans from the first dot (10%) to the last (90%).
+  const fill = Math.min((active + progress) / (tabs.length - 1), 1) * 80;
+
+  return (
+    <section
+      id="features"
+      className="relative mx-auto max-w-7xl overflow-hidden px-5 py-20 sm:px-8 sm:py-28"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* decorative glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-8 h-72 w-[44rem] -translate-x-1/2 rounded-full bg-brand-300/20 blur-[90px]"
+      />
+
+      {/* Heading */}
+      <div className="relative text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-700">
+          <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+          The growth journey
+        </span>
+        <h2 className="mx-auto mt-5 max-w-3xl font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-neutral-900 sm:text-5xl">
+          Your all-in-one solution for{" "}
+          <span className="bg-brand-gradient bg-clip-text text-transparent">business growth</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-neutral-500">
+          Five stages, one platform — guiding every lead from first touch to lifelong fan.
+        </p>
       </div>
 
-      {/* Panel */}
-      <div className="mt-9 rounded-[28px] bg-[#f4f5f3] p-7 sm:p-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={tab.key}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="grid items-stretch gap-10 lg:grid-cols-2"
-          >
-            {/* Left — content */}
-            <div className="flex flex-col">
-              <span
-                className={`grid h-12 w-12 place-items-center rounded-full ${accent.dark ? "text-white" : "text-neutral-900"}`}
-                style={{ backgroundColor: accent.solid }}
+      {/* Journey stepper */}
+      <div className="relative mx-auto mt-14 max-w-3xl">
+        <div className="absolute left-[10%] right-[10%] top-6 h-[3px] -translate-y-1/2 rounded-full bg-neutral-200" />
+        <div
+          className="absolute left-[10%] top-6 h-[3px] -translate-y-1/2 rounded-full bg-brand-gradient transition-[width] duration-150 ease-linear"
+          style={{ width: `${fill}%` }}
+        />
+        <div className="relative flex">
+          {tabs.map((t, i) => {
+            const done = i < active;
+            const isActive = i === active;
+            return (
+              <button
+                key={t.key}
+                type="button"
+                onClick={() => select(i)}
+                className="group flex flex-1 flex-col items-center gap-3"
               >
-                <Icon className="h-5 w-5" strokeWidth={2.2} />
-              </span>
-
-              <h3 className="mt-6 font-display text-3xl font-bold tracking-tight text-neutral-900">
-                {tab.heading}
-              </h3>
-              <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-500">
-                {tab.blurb}
-              </p>
-
-              <div className="mt-7 grid grid-cols-1 gap-x-10 text-[15px] leading-relaxed text-neutral-600 sm:grid-cols-2">
-                {[leftFeatures, rightFeatures].map((col, ci) => (
-                  <ul key={ci} className="space-y-4">
-                    {col.map((f) => (
-                      <li key={f} className="flex items-start gap-3">
-                        <span className="mt-0.5 inline-grid h-[22px] w-[22px] shrink-0 place-items-center rounded-full bg-neutral-900 text-white">
-                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                        </span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                ))}
-              </div>
-
-              <div className="mt-9">
-                <a
-                  href="#get-started"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#16233a] px-7 py-4 text-[15px] font-bold text-white transition-all duration-200 hover:bg-[#1e3052] active:scale-[0.98]"
+                <span
+                  className={
+                    "grid h-12 w-12 place-items-center rounded-full font-display text-sm font-bold transition-all duration-300 " +
+                    (isActive
+                      ? "scale-110 bg-brand-gradient text-white shadow-[0_10px_28px_-6px_rgba(22,189,94,0.6)]"
+                      : done
+                        ? "bg-brand-500 text-white"
+                        : "border border-neutral-200 bg-white text-neutral-400 group-hover:border-brand-300 group-hover:text-brand-600")
+                  }
                 >
-                  Start 14 Day Free Trial
-                  <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </a>
-              </div>
-            </div>
+                  {done ? (
+                    <Check className="h-5 w-5" strokeWidth={3} />
+                  ) : (
+                    String(i + 1).padStart(2, "0")
+                  )}
+                </span>
+                <span
+                  className={
+                    "hidden text-sm transition-colors sm:block " +
+                    (isActive
+                      ? "font-bold text-neutral-900"
+                      : "font-medium text-neutral-400 group-hover:text-neutral-700")
+                  }
+                >
+                  {t.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-            {/* Right — preview */}
-            {tab.key === "capture" ? (
-              <ChatMockup />
-            ) : tab.key === "nurture" ? (
-              <WorkflowMockup />
-            ) : tab.key === "close" ? (
-              <CloseChatMockup />
-            ) : tab.key === "evangelize" ? (
-              <ReviewsMockup />
-            ) : (
-              <ReactivateMockup />
-            )}
-          </motion.div>
-        </AnimatePresence>
+      {/* Panel with gradient border */}
+      <div className="relative mt-12 rounded-[20px] bg-gradient-to-br from-brand-300/50 via-neutral-200/50 to-brand-500/40 p-px shadow-[0_40px_90px_-60px_rgba(15,80,40,0.4)]">
+        <div className="relative overflow-hidden rounded-[19px] bg-gradient-to-br from-white to-brand-50/40 px-6 py-7 sm:px-10 sm:py-9">
+          {/* inner glow + watermark step number */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-brand-300/20 blur-3xl"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-5 top-0 select-none font-display text-[8rem] font-black leading-none text-brand-500/[0.06] sm:text-[11rem]"
+          >
+            {num}
+          </span>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={tab.key}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="relative grid items-center gap-8 lg:grid-cols-[1.1fr_1fr]"
+            >
+              {/* Left — content */}
+              <div className="flex flex-col">
+                <div className="flex items-center gap-3.5">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-gradient text-white shadow-[0_12px_30px_-10px_rgba(22,189,94,0.7)]">
+                    <Icon className="h-5 w-5" strokeWidth={2.2} />
+                  </span>
+                  <div>
+                    <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-600">
+                      Step {num} / {total} · {tab.label}
+                    </div>
+                    <div className="mt-1.5 h-1 w-10 rounded-full bg-brand-gradient" />
+                  </div>
+                </div>
+
+                <h3 className="mt-5 font-display text-[1.7rem] font-bold leading-tight tracking-tight text-neutral-900">
+                  {tab.heading}
+                </h3>
+                <p className="mt-2.5 max-w-md text-[15px] leading-relaxed text-neutral-500">
+                  {tab.blurb}
+                </p>
+
+                <div className="mt-6 grid grid-cols-1 gap-x-8 text-sm leading-snug text-neutral-600 sm:grid-cols-2">
+                  {[leftFeatures, rightFeatures].map((col, ci) => (
+                    <ul key={ci} className="space-y-2.5">
+                      {col.map((f) => (
+                        <li key={f} className="flex items-start gap-2.5">
+                          <span className="mt-0.5 inline-grid h-5 w-5 shrink-0 place-items-center rounded-full bg-neutral-900 text-white">
+                            <Check className="h-3 w-3" strokeWidth={3} />
+                          </span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+
+                <div className="mt-7">
+                  <a
+                    href="#get-started"
+                    className="group inline-flex items-center gap-2 rounded-xl bg-[#16233a] px-6 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-[#1e3052] active:scale-[0.98]"
+                  >
+                    Start 14 Day Free Trial
+                    <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right — preview */}
+              {tab.key === "capture" ? (
+                <ChatMockup />
+              ) : tab.key === "nurture" ? (
+                <WorkflowMockup />
+              ) : tab.key === "close" ? (
+                <CloseChatMockup />
+              ) : tab.key === "evangelize" ? (
+                <ReviewsMockup />
+              ) : (
+                <ReactivateMockup />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
@@ -170,9 +251,9 @@ export function AxnixSolution() {
 /** Missed-call text-back conversation — used on the Capture card. */
 function ChatMockup() {
   return (
-    <div className="hidden min-h-[360px] flex-col justify-center gap-6 lg:flex">
+    <div className="hidden min-h-[240px] flex-col justify-center gap-4 lg:flex">
       {/* business → customer */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2.5">
         <GrowthAvatar />
         <Bubble side="in">
           Sorry we missed your call!
@@ -203,7 +284,7 @@ function ChatMockup() {
 /** Closing conversation — used on the Close card. */
 function CloseChatMockup() {
   return (
-    <div className="hidden min-h-[360px] flex-col justify-center gap-5 lg:flex">
+    <div className="hidden min-h-[240px] flex-col justify-center gap-5 lg:flex">
       {/* customer → business */}
       <div className="flex items-center justify-end gap-3">
         <Bubble side="out">
@@ -243,10 +324,10 @@ function ReviewsMockup() {
     { label: 1, pct: 3 },
   ];
   return (
-    <div className="hidden min-h-[360px] items-center justify-center lg:flex">
-      <div className="w-full max-w-[320px] rounded-2xl bg-white p-7 shadow-[0_30px_70px_-40px_rgba(15,30,20,0.3)]">
-        <div className="text-center text-sm font-semibold text-neutral-500">Average Reviews</div>
-        <div className="mt-2 text-center font-display text-4xl font-extrabold text-neutral-900">
+    <div className="hidden min-h-[240px] items-center justify-center lg:flex">
+      <div className="w-full max-w-[270px] rounded-2xl bg-white p-5 shadow-[0_30px_70px_-40px_rgba(15,30,20,0.3)]">
+        <div className="text-center text-[13px] font-semibold text-neutral-500">Average Reviews</div>
+        <div className="mt-1.5 text-center font-display text-3xl font-extrabold text-neutral-900">
           4.3/5
         </div>
         <div className="mt-3 flex justify-center gap-1">
@@ -291,8 +372,8 @@ function Bubble({ side, children }: { side: "in" | "out"; children: React.ReactN
     <div
       className={
         side === "in"
-          ? "max-w-[78%] rounded-3xl rounded-bl-md bg-[#2f5cf5] px-5 py-3.5 text-[17px] font-medium leading-snug text-white"
-          : "max-w-[78%] rounded-3xl rounded-br-md border border-neutral-200 bg-white px-5 py-3.5 text-[17px] font-medium leading-snug text-neutral-800 shadow-sm"
+          ? "max-w-[80%] rounded-2xl rounded-bl-md bg-[#2f5cf5] px-4 py-2.5 text-[13.5px] font-medium leading-snug text-white"
+          : "max-w-[80%] rounded-2xl rounded-br-md border border-neutral-200 bg-white px-4 py-2.5 text-[13.5px] font-medium leading-snug text-neutral-800 shadow-sm"
       }
     >
       {children}
@@ -307,8 +388,8 @@ function GrowthAvatar() {
     { cx: 36, top: 13, color: "#20c45f" },
   ];
   return (
-    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-white shadow-[0_4px_14px_-4px_rgba(15,30,20,0.25)]">
-      <svg width="30" height="30" viewBox="0 0 48 48" fill="none" aria-hidden>
+    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white shadow-[0_4px_14px_-4px_rgba(15,30,20,0.25)]">
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden>
         {arrows.map((a) => {
           const half = 7;
           const quarter = 3.5;
@@ -328,9 +409,9 @@ function PersonAvatar({ variant = "woman" }: { variant?: "woman" | "man" }) {
       : "from-[#e9a06b] to-[#7b3f2a]";
   return (
     <span
-      className={`grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl bg-gradient-to-br ${grad} shadow-[0_4px_14px_-4px_rgba(15,30,20,0.25)]`}
+      className={`grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-gradient-to-br ${grad} shadow-[0_4px_14px_-4px_rgba(15,30,20,0.25)]`}
     >
-      <User className="h-7 w-7 text-white/90" strokeWidth={2} fill="currentColor" />
+      <User className="h-6 w-6 text-white/90" strokeWidth={2} fill="currentColor" />
     </span>
   );
 }
@@ -338,7 +419,7 @@ function PersonAvatar({ variant = "woman" }: { variant?: "woman" | "man" }) {
 /** Automation flow — used on the Nurture card. */
 function WorkflowMockup() {
   return (
-    <div className="hidden min-h-[360px] flex-col justify-center lg:flex">
+    <div className="hidden min-h-[240px] flex-col justify-center lg:flex">
       <div className="mx-auto w-full max-w-[300px]">
         <WfNode
           icon={MessageCircle}
@@ -411,7 +492,7 @@ function WfConnector() {
 /** Trigger → offer flow with reply — used on the Reactivate card. */
 function ReactivateMockup() {
   return (
-    <div className="hidden min-h-[360px] flex-col justify-center lg:flex">
+    <div className="hidden min-h-[240px] flex-col justify-center lg:flex">
       <div className="mx-auto w-full max-w-[320px]">
         {/* Trigger node */}
         <div className="flex items-center gap-3 rounded-xl border border-neutral-200 bg-white px-3.5 py-3 shadow-[0_6px_18px_-12px_rgba(15,30,20,0.3)]">

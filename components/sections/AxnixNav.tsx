@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { AxnixLogo } from "@/components/brand/AxnixLogo";
@@ -14,9 +14,24 @@ const LINKS = [
 
 export function AxnixNav() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50">
+    <header
+      className={
+        "sticky top-0 z-50 transition-colors duration-300 " +
+        (scrolled
+          ? "border-b border-black/[0.06] bg-[#f4f5f3]/80 backdrop-blur-md"
+          : "border-b border-transparent")
+      }
+    >
       <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
         {/* Brand */}
         <a href="#top" aria-label="Axnix home" className="relative z-10 shrink-0">
