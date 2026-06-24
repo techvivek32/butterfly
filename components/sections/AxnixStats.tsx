@@ -31,11 +31,7 @@ export function AxnixStats() {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           className="text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-700">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-            Why choose Axnix
-          </span>
-          <h2 className="mx-auto mt-5 max-w-2xl font-display text-4xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">
+          <h2 className="mx-auto font-display text-4xl font-extrabold tracking-tight text-neutral-900 sm:whitespace-nowrap sm:text-5xl">
             Trusted to drive real results, at scale
           </h2>
         </motion.div>
